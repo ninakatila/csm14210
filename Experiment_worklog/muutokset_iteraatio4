@@ -1,0 +1,20 @@
+iteraatio4 muutokset:
+
+question.html: muutettu takaisin {{question.question_text}}
+
+polls admin-näkymässä muutettu Sweden vanhin pub_date ja Denmark uusin pub_date eli nyt ei Sweden tule listoille ollenkaan.
+
+**********'
+
+ajettu Robot testit, 2 viimeistä feilaa, koska: Link with locator 'link=Nov. 17, 2019, 6 p.m.' not found.
+
+Korjattu, korjausaika 20 sek
+
+---------
+
+ajettu testim testi ja nyt testi feilasi, valitsi Denmarkin ok, mutta kun olisi pitänyt valita listan viimeinen Finland niin tähän feilasi, etsi ilmeisesti Swedeniä, vaikka Locators valittuna vain Id=ListOfQuestion ja Text=Finland. Kun seuraavaa testiaskelta, jossa valitsee kaupungin (choice1) meni ajamaan editorin kautta ja sieltä otti täpät/valinnat pois Locatorsista kaikista muista paitsi Id=choice1 ja muutti askeleen Description kenttään Click "Helsinki", niin askel meni läpi ja kun editorista playn kautta ajoi testin uudelleen, testi alkoi toimimaan ja passed 20 sec. 
+
+Ajettu testi uudelleen vielä Automate-näkymän kautta, testi edelleen feilaa samaan kohtaan vaika testi toimii editorin kautta ajettuna -> menty uudelleen editor-näkymään (kynän kuvasta vasemalla), tallennettu testi valitsemalla Save, kirjoitettu kommentiksi modified step 11, 13 locators. Tämän jälkeen vielä ajettu testi ja nyt testi menee läpi, ks. kuva testim_iter4_after_repairing_test.png
+
+korjausaika 23 minuuttia (näkyy test suitesta feilanneen testi ja onnistuneen välinen aika)
+

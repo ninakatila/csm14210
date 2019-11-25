@@ -1,0 +1,52 @@
+Iteraatio2 muutokset:
+
+views.py tiedostoon muutettu logiikkaa, mitä maita ja missä järjestyksessä näytetään question-sivulla:
+
+	Iteraatiossa 1 eli alkuperäinen oli näin:
+
+    		def get_queryset(self):
+		    """
+		    Return published questions (not including those set to be
+		    published in the future).
+		    """
+		    return Question.objects.filter(
+		        pub_date__lte=timezone.now()
+		    ).order_by('question_text')
+
+
+	Muutettu nyt tällaiseksi:
+
+    		def get_queryset(self):
+	    		"""
+	    		Return the last four published questions (not including those set 				to be published in the future).
+	    		"""
+	    		return Question.objects.filter(
+	   	     		pub_date__lte=timezone.now()
+	  	  	).order_by('-pub_date') [:4]
+
+detail.html:
+	value="Best Choice" --> muutettu value="Vote"
+
+*************************************'
+
+Ajettu testit Robot Framework, "iteraatio2_ti_log.html", seuraavat virhesanomat:
+	Link with locator 'link=Denmark' not found
+	Link with locator 'id=NewVote' not found
+
+Ei löydä NewVote:a koska edellinen testi kaatui eikä detail- ja result-sivu auennut
+
+Korjaus vain link=Denmark --> link=Finland ja testit toimivat jälleen, korjausaika 7 sekuntia
+
+----------------------------
+
+Ajettu testim testi:
+testi menee taas läpi eli testaajan näkökulmasta mitään ei ole muuttunut, ei ilmoita mitenkään minkään muuttuneen. Vain jos tietää muutokset, voi mennä tarkistamaan testiaskeleiden ominaisuuksia (ks. kuva testim_iter2_t1_screenshot2.png). Testissä otti listan ensimmäisen, joka ennen oli Denmark ja nyt Sweden, locaattorissa edelleen lukee Denmark. Testissä valitsi Sweden kaksi kertaa. Nyt testissä siis valitsi listan ensimmäiseksi oikein, mutta lista viimeiseksi väärän, sillä listan viimeinen on nyt Finland. Korjattu locaattorit, aikaa kului 2 minuuttia 5 sekuntia.
+
+Ajettu testim testi uudelleen:
+Edelleen valitsee listalta Sweden kaksi kertaa, vaikka toisella valinnalla olisi pitänyt olla Finland ja tämä oli korjattu locaattoreihinkin, MITÄ IHMETTÄ?!?
+Korjattu nyt siten, että askeleessa, jossa pitäisi valita Finland, on Locators valinnoista otettu täppä pois A:href, Tag ja Index. Täppä jätetty vain kohtiin Id ja Text, ks. kuva testim_iter2_korjaus2.png. Muutettu vielä askeleen nimeksi/Description > Click "Finland"
+
+Ajettu testim testi uudelleen:
+Ei vaikutusta, testi edelleen valitsee Sweden myös 11. askeleen kohdalla. Ikään kuin Locators-muutoksilla ei olisi mitään vaikutusta, vaan "AI"/ML jyrää päätöksellään joka kerta. Otettu pari screencast-videota "todisteeksi".
+
+Jatketaan iteraatioon 3

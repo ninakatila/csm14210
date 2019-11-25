@@ -1,0 +1,36 @@
+Note: pelkkä t1 tarkoittaa testikierrokselle 1 tehtyjä testejä, jolloin testit on ajettu alkuperäiselle versiolle pollsista, johon ei siis ole vielä tehty iteraation 1 muutoksia.
+--------
+
+Muutokset iteraatiossa 1:
+
+results.html: id=VoteAgain --> muutettu: id=NewVote
+		linkin teksti "Vote Again?" --> muutettu "New Vote
+
+question.html: id=QuestionList --> muutettu: id=ListOfQuestions
+
+detail.html: id=VoteForChoice --> muutettu: id=Vote
+		value="Vote" --> muutettu: value="Best Choice"
+
+index.html: id=ToQuestion --> muutettu: id=ToQuestionList
+
+********************
+
+ajettu testit, robot feilaa, log-tiedosto tallennettu Experiment-kansioon nimellä "iteraatio1_t1_log.html"
+Logitiedostosta näkyy seuraavat virhesanomat (message):
+	Page should have contained link 'id=ToQuestion' but did not.
+	Link with locator 'link=Denmark' not found.
+ 	Link with locator 'id=VoteAgain' not found.
+
+Ei mainintaa id=QuestionList ja link=Denmark ei löydy, koska eka testi pysähtyi virheeseen eikä siirtynyt question-sivulle.
+
+Korjattu tämän tiedoston muutoslokin pohjalta. Tarvitsi korjata vain id:t resurssitiedostoon eli Robot_polls_common.robot. Korjaukseen meni aikaa 9 minuuttia.
+
+**************
+
+ajettu testi testim:llä, testi menee läpi, mutta vie kaksinkertaisen ajan 21 s --> 46 s
+testissä askeleissa Locator-näkymässä (testiaskeleen hammasrattaasta eli settings ja mennään Target Element kuvasta View Locators) vanhat id:t ja valuet. 
+
+Korjattu nämä jokaisesta testiaskeleesta, en löydä miten voisi keskitetysti korjata kuten Robot Frameworkista. Korjausaika 12 minuuttia. Viety kuva Experiment-kansioon nimellä "testim_locator_update_iter1.png"
+
+Korjausten jälkeenkin testin ajo kestää edelleen 46 sekuntia eli ei vaikutusta testin kestoon, katsotaan mitä tapahtuu kun teen iteraation 2 muutokset
+
